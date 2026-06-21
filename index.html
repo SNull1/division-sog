@@ -66,7 +66,7 @@
             text-align: center;
             position: relative;
             background: linear-gradient(rgba(7, 7, 9, 0.6), rgba(7, 7, 9, 0.95)), 
-                        url('https://images.unsplash.com/photo-1718592168437-8382e5b97736?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+                        url('https://sofprepcoach.com/wp-content/uploads/2024/10/USMS-Sog.jpg') no-repeat center center/cover;
             padding: 20px;
             border-bottom: 2px solid var(--gold);
         }
@@ -277,32 +277,37 @@
     <section class="hero">
         <img class="hero-badge" src="https://i.ibb.co/r2dHcJGM/1623003664324-removebg-preview.png" alt="Badge USMS">
         <h1>US MARSHALS</h1>
-        <p>Fugitive Investigative Division</p>
+        <p>Special Operations Group</p>
         <div class="scroll-indicator" onclick="document.getElementById('missions').scrollIntoView();">
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </section>
 
     <section class="section" id="missions">
-        <h2 class="section-title reveal">Nos piliers opérationnels</h2>
-        <div class="grid-cards">
-            <div class="card reveal delay-1">
-                <i class="fa-solid fa-crosshairs"></i>
-                <h3>La Traque</h3>
-                <p>La FID est spécialisée dans la localisation et la capture des fugitifs les plus violents et recherchés du pays. Aucun refuge n'est imprenable.</p>
-            </div>
-            <div class="card reveal delay-2">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h3>Intégrité & Justice</h3>
-                <p>Protéger le système judiciaire fédéral, escorter les témoins sous haute protection, et faire appliquer la loi sans aucune faille morale.</p>
-            </div>
-            <div class="card reveal delay-3">
-                <i class="fa-solid fa-gun"></i>
-                <h3>Haute Sphère Tactique</h3>
-                <p>Interventions à haut risque, infiltration, surveillance électronique avancée. Nous opérons là où les autres forces s'arrêtent.</p>
-            </div>
+    <h2 class="section-title reveal">Nos capacités opérationnelles</h2>
+
+    <div class="grid-cards">
+
+        <div class="card reveal delay-1">
+            <i class="fa-solid fa-person-rifle"></i>
+            <h3>Interventions à Haut Risque</h3>
+            <p>Le SOG intervient lors des opérations nécessitant un niveau tactique avancé : arrestations critiques, exécutions de mandats complexes et sécurisation de zones sensibles.</p>
         </div>
-    </section>
+
+        <div class="card reveal delay-2">
+            <i class="fa-solid fa-shield"></i>
+            <h3>Protection Judiciaire</h3>
+            <p>Assurer la protection des infrastructures fédérales, du personnel judiciaire et soutenir les opérations sensibles exigeant une présence renforcée.</p>
+        </div>
+
+        <div class="card reveal delay-3">
+            <i class="fa-solid fa-binoculars"></i>
+            <h3>Reconnaissance & Appui Tactique</h3>
+            <p>Observation, coordination terrain, collecte d'informations et assistance opérationnelle pour garantir une exécution rapide et maîtrisée.</p>
+        </div>
+
+    </div>
+</section>
 
     <section class="section">
         <h2 class="section-title reveal">Dossier de Candidature Fédéral</h2>
@@ -365,7 +370,7 @@
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="motivations">Pourquoi voulez-vous rejoindre la FID et pas une autre division ?</label>
+                        <label for="motivations">Pourquoi voulez-vous rejoindre le SOG et pas une autre division ?</label>
                         <textarea id="motivations" rows="4" placeholder="Exprimez vos motivations profondes à rejoindre l'élite de la traque..." required></textarea>
                     </div>
 
@@ -385,7 +390,7 @@
     </section>
 
     <footer>
-        UNITED STATES MARSHALS SERVICE • FUGITIVE INVESTIGATIVE DIVISION • RECRUITMENT SYSTEM SECURED
+        UNITED STATES MARSHALS SERVICE • SPECIAL OPERATIONS GROUP • RECRUITMENT SYSTEM SECURED
     </footer>
 
     <script>
@@ -404,7 +409,7 @@
 
         // 2. CONFIGURATION ET ENVOI DU CONFIG DISCORD WEBHOOK
         // ⚠️ REMPLACEZ LA VALEUR CI-DESSOUS PAR VOTRE URL DE WEBHOOK DISCORD
-        const WEBHOOK_URL = "https://discord.com/api/webhooks/1518047937161330828/u2lRBHeXribC9QnkdOedDzErGz77i9NcfEfC6alDKdbV49a4cwKEAHFddzO2dwjrzaUD";
+        const WEBHOOK_URL = "LIEN_ICI";
 
         document.getElementById('fid-recruitment-form').addEventListener('submit', function(e) {
             e.preventDefault();
