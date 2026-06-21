@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USMS - Fugitive Investigative Division</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* === CONFIGURATION GENERALE === */
+        :root {
+            --bg-dark: #070709;
+            --bg-card: #111115;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #8a8a93;
+            --border: rgba(255, 255, 255, 0.07);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Barre de défilement personnalisée */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+        /* === ANIMATIONS DE SCROLL (REVEAL) === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        /* === SECTION 1 : HERO HAUT DE PAGE === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(7, 7, 9, 0.6), rgba(7, 7, 9, 0.95)), 
+                        url('https://images.unsplash.com/photo-1718592168437-8382e5b97736?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            padding: 20px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .hero-badge {
+            width: 130px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px var(--gold-glow));
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #ffffff 60%, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* === SECTION 2 : MISSIONS & STATS === */
+        .section {
+            padding: 100px 10% 60px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 50px;
+            border-left: 5px solid var(--gold);
+            padding-left: 20px;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* === SECTION 3 : RECRUTEMENT FORMULAIRE === */
+        .form-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 50px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            background: #181822;
+            border: 1px solid var(--border);
+            padding: 15px;
+            color: white;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .submit-btn {
+            grid-column: span 2;
+            background: linear-gradient(135deg, var(--gold), #b89225);
+            color: black;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            padding: 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px var(--gold);
+        }
+
+        #status-message {
+            grid-column: span 2;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* === KEYFRAMES / REGLAGES GSM === */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px var(--gold-glow)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 25px var(--gold)); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .submit-btn { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <img class="hero-badge" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Seal_of_the_United_States_Marshals_Service.svg/500px-Seal_of_the_United_States_Marshals_Service.svg.png?_=20090103033818" alt="Badge USMS">
+        <h1>US MARSHALS</h1>
+        <p>Fugitive Investigative Division</p>
+        <div class="scroll-indicator" onclick="document.getElementById('missions').scrollIntoView();">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="section" id="missions">
+        <h2 class="section-title reveal">Nos piliers opérationnels</h2>
+        <div class="grid-cards">
+            <div class="card reveal delay-1">
+                <i class="fa-solid fa-crosshairs"></i>
+                <h3>La Traque</h3>
+                <p>La FID est spécialisée dans la localisation et la capture des fugitifs les plus violents et recherchés du pays. Aucun refuge n'est imprenable.</p>
+            </div>
+            <div class="card reveal delay-2">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Intégrité & Justice</h3>
+                <p>Protéger le système judiciaire fédéral, escorter les témoins sous haute protection, et faire appliquer la loi sans aucune faille morale.</p>
+            </div>
+            <div class="card reveal delay-3">
+                <i class="fa-solid fa-gun"></i>
+                <h3>Haute Sphère Tactique</h3>
+                <p>Interventions à haut risque, infiltration, surveillance électronique avancée. Nous opérons là où les autres forces s'arrêtent.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title reveal">Dossier de Candidature Fédéral</h2>
+        <p class="reveal" style="color: var(--text-muted); margin-top:-30px; margin-bottom: 30px;">Remplissez ce formulaire avec la plus grande honnêteté. Vos données seront cryptées et envoyées au bureau central.</p>
+        
+        <div class="form-container reveal">
+            <form id="fid-recruitment-form">
+                <div class="form-grid">
+                    
+                    <h3 class="full-width" style="color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.2rem;"><i class="fa-solid fa-user-gear"></i> Informations HRP</h3>
+                    
+                    <div class="form-group">
+                        <label for="discord">Pseudo Discord</label>
+                        <input type="text" id="discord" placeholder="Ex: Jean_Fournier#1234 (ou id unique)" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="dispo">Disponibilités hebdomadaires (Heures & Jours)</label>
+                        <input type="text" id="dispo" placeholder="Ex: En semaine de 18h à 23h, libre le week-end" required>
+                    </div>
+
+                    <h3 class="full-width" style="color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.2rem; margin-top: 20px;"><i class="fa-solid fa-id-card"></i> Informations</h3>
+
+                    <div class="form-group">
+                        <label for="name_rp">Prénom & Nom</label>
+                        <input type="text" id="name_rp" placeholder="Ex: Marcus Vance" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age_rp">Âge</label>
+                        <input type="number" id="age_rp" min="21" placeholder="Ex: 28" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="phone">Numéro de Téléphone</label>
+                        <input type="text" id="phone" placeholder="Ex: 555-0192" required>
+                    </div>
+
+                    <h3 class="full-width" style="color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.2rem; margin-top: 20px;"><i class="fa-solid fa-graduation-cap"></i> Expérience & Qualifications</h3>
+
+                    <div class="form-group full-width">
+                        <label for="experience">Vos expériences passées dans les Forces de l'Ordre (LSPD, BCSO, FBI, etc.)</label>
+                        <textarea id="experience" rows="3" placeholder="Détaillez vos anciens grades, vos spécialisations et vos raisons de départ..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="law_level">connaissance des lois et procédures (1 à 10)</label>
+                        <select id="law_level" required>
+                            <option value="" disabled selected>Sélectionnez un niveau</option>
+                            <option value="1-3">1 à 3 (Débutant - Notions de base)</option>
+                            <option value="4-6">4 à 6 (Intermédiaire - Code pénal maîtrisé)</option>
+                            <option value="7-9">7 à 9 (Avancé - Procédures fédérales acquises)</option>
+                            <option value="10">10 (Expert - Parfaite maîtrise absolue)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qualities">Citez vos 3 principales qualités pour ce poste</label>
+                        <input type="text" id="qualities" placeholder="Ex: Sang-froid, Discipline, Esprit d'équipe" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="motivations">Pourquoi voulez-vous rejoindre la FID et pas une autre division ?</label>
+                        <textarea id="motivations" rows="4" placeholder="Exprimez vos motivations profondes à rejoindre l'élite de la traque..." required></textarea>
+                    </div>
+
+                    <h3 class="full-width" style="color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 10px; font-size: 1.2rem; margin-top: 20px;"><i class="fa-solid fa-shield-cat"></i> Scénario & Jugement Tactique</h3>
+
+                    <div class="form-group full-width">
+                        <label for="scenario">Scénario : Vous repérez un fugitif recherché pour meurtre devant un motel. Il entre seul dans une chambre. Vous êtes actuellement en patrouille solo. Quelle est votre réaction et votre procédure exacte ?</label>
+                        <textarea id="scenario" rows="4" placeholder="Décrivez vos actions étape par étape (Appels radio, périmètre, approche tactique...)" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Transmettre le dossier</button>
+                    <div id="status-message"></div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        UNITED STATES MARSHALS SERVICE • FUGITIVE INVESTIGATIVE DIVISION • RECRUITMENT SYSTEM SECURED
+    </footer>
+
+    <script>
+        // 1. ANIMATIONS FLUIDES AU SCROLL (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+        // 2. CONFIGURATION ET ENVOI DU CONFIG DISCORD WEBHOOK
+        // ⚠️ REMPLACEZ LA VALEUR CI-DESSOUS PAR VOTRE URL DE WEBHOOK DISCORD
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1518047937161330828/u2lRBHeXribC9QnkdOedDzErGz77i9NcfEfC6alDKdbV49a4cwKEAHFddzO2dwjrzaUD";
+
+        document.getElementById('fid-recruitment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const statusMessage = document.getElementById('status-message');
+            statusMessage.innerText = "Encapsulation et chiffrement des données de transmission...";
+            statusMessage.style.color = "var(--gold)";
+
+            // Sécurité anti-oubli de configuration
+            if (WEBHOOK_URL === "VOTRE_WEBHOOK_ICI") {
+                statusMessage.innerText = "❌ ERREUR SYSTÈME : L'administrateur n'a pas configuré le Webhook Discord.";
+                statusMessage.style.color = "#ff4d4d";
+                return;
+            }
+
+            // Récupération de l'ensemble des réponses du formulaire
+            const discord = document.getElementById('discord').value;
+            const dispo = document.getElementById('dispo').value;
+            const nameRp = document.getElementById('name_rp').value;
+            const ageRp = document.getElementById('age_rp').value;
+            const phone = document.getElementById('phone').value;
+            const experience = document.getElementById('experience').value;
+            const lawLevel = document.getElementById('law_level').value;
+            const qualities = document.getElementById('qualities').value;
+            const motivations = document.getElementById('motivations').value;
+            const scenario = document.getElementById('scenario').value;
+
+            // Construction de l'Embed Discord ultra stylisé
+            const discordPayload = {
+                username: "USMS F.I.D. Intelligence Division",
+                avatar_url: "https://commons.wikimedia.org/wiki/File:Seal_of_the_United_States_Marshals_Service.svg",
+                embeds: [
+                    {
+                        title: "🚔 NOUVEAU DOSSIER DE CANDIDATURE ENREGISTRÉ",
+                        description: `Un citoyen a déposé sa candidature pour intégrer la **Fugitive Investigative Division**.\nVoici l'ensemble des données collectées :`,
+                        color: 13938487, // Code couleur Or décimal
+                        fields: [
+                            { name: "🛡️ Section HRP", value: `**Discord :** ${discord}\n**Disponibilités :** ${dispo}`, inline: false },
+                            { name: "👤 Identité Civile", value: `**Nom :** ${nameRp}\n**Âge :** ${ageRp} ans\n**Téléphone :** ${phone}`, inline: false },
+                            { name: "📊 Profil Tactique & Expérience", value: `**Expériences :**\n\`\`\`${experience}\`\`\`\n**Niveau Code Pénal/Lois :** ${lawLevel}/10\n**Qualités clés :** ${qualities}`, inline: false },
+                            { name: "🎯 Motivations Générales", value: `\`\`\`${motivations}\`\`\``, inline: false },
+                            { name: "🔫 Résolution du Scénario d'Intervention", value: `\`\`\`${scenario}\`\`\``, inline: false }
+                        ],
+                        footer: {
+                            text: "Système Central USMS - Connexion Cryptée SSL"
+                        },
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            // Envoi de la requête POST vers le serveur Discord
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(discordPayload)
+            })
+            .then(response => {
+                if(response.ok) {
+                    statusMessage.innerText = "✅ TRANSMISSION RÉUSSIE. Votre dossier a été reçu par le Bureau Central.";
+                    statusMessage.style.color = "#4dff88";
+                    document.getElementById('fid-recruitment-form').reset();
+                } else {
+                    statusMessage.innerText = "❌ ERREUR DE TRANSMISSION : Discord refuse de valider le paquet.";
+                    statusMessage.style.color = "#ff4d4d";
+                }
+            })
+            .catch(error => {
+                statusMessage.innerText = "❌ ERREUR RÉSEAU : Impossible de joindre le serveur fédéral.";
+                statusMessage.style.color = "#ff4d4d";
+            });
+        });
+    </script>
+</body>
+</html>
